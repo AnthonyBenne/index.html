@@ -109,6 +109,10 @@
       border: 1px solid var(--coral);
       border-radius: 2px;
       transition: background 0.2s, border-color 0.2s;
+      text-align: center;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
     }
     .btn-nav:hover { background: var(--coral-dark); border-color: var(--coral-dark); }
 
@@ -842,6 +846,17 @@
       .schedule-tiles { grid-template-columns: 1fr; }
     }
 
+    /* ── MOBILE COLOR FIX ── */
+    @media (max-width: 768px) {
+      .problem { background: #080E20 !important; }
+      .features { background: #080E20 !important; }
+      .about { background: #080E20 !important; }
+      .meet-ben { background: #080E20 !important; }
+      .schedule-section { background: #080E20 !important; }
+      .story { background: #080E20 !important; }
+      body { background: #080E20 !important; }
+    }
+
     /* ── CONTACT FORM ── */
     .contact {
       background: var(--chalk);
@@ -1029,11 +1044,11 @@
       align-items: center;
     }
     .meet-ben-photo {
-      width: 160px;
-      height: 160px;
+      width: 200px;
+      height: 200px;
       border-radius: 50%;
       object-fit: cover;
-      object-position: center 20%;
+      object-position: center 15%;
       border: 3px solid var(--coral);
       flex-shrink: 0;
     }
@@ -1084,7 +1099,7 @@
       .footer { padding: 48px 24px 32px; }
       .problem-bridge { padding: 40px 24px; }
       .meet-ben-inner { padding: 0 24px; grid-template-columns: 1fr; text-align: center; justify-items: center; }
-      .meet-ben-photo { width: 120px; height: 120px; }
+      .meet-ben-photo { width: 150px; height: 150px; }
     }
   </style>
 </head>
@@ -1161,14 +1176,14 @@
     <div class="ticker-item"><span class="ticker-dot">·</span>Fairfield County, Connecticut</div>
     <div class="ticker-item"><span class="ticker-dot">·</span>Bergen County, New Jersey</div>
     <div class="ticker-item"><span class="ticker-dot">·</span>888.814.6365</div>
-    <div class="ticker-item"><span class="ticker-dot">·</span>Office@BenAnthony.com</div>
+    <div class="ticker-item"><span class="ticker-dot">·</span>office@benanthony.com</div>
     <div class="ticker-item"><span class="ticker-dot">·</span>NASDAQ: REAX</div>
     <div class="ticker-item"><span class="ticker-dot">·</span>One Real Mortgage · One Real Title</div>
     <div class="ticker-item"><span class="ticker-dot">·</span>Work Hard. Be Kind.</div>
     <div class="ticker-item"><span class="ticker-dot">·</span>Fairfield County, Connecticut</div>
     <div class="ticker-item"><span class="ticker-dot">·</span>Bergen County, New Jersey</div>
     <div class="ticker-item"><span class="ticker-dot">·</span>888.814.6365</div>
-    <div class="ticker-item"><span class="ticker-dot">·</span>Office@BenAnthony.com</div>
+    <div class="ticker-item"><span class="ticker-dot">·</span>office@benanthony.com</div>
     <div class="ticker-item"><span class="ticker-dot">·</span>NASDAQ: REAX</div>
     <div class="ticker-item"><span class="ticker-dot">·</span>One Real Mortgage · One Real Title</div>
   </div>
@@ -1442,7 +1457,7 @@
           </div>
           <div class="about-contact-row">
             <div class="about-contact-label">Email</div>
-            <a href="mailto:Office@BenAnthony.com" class="about-contact-value">Office@BenAnthony.com</a>
+            <a href="mailto:office@benanthony.com" class="about-contact-value">office@benanthony.com</a>
           </div>
           <div class="about-contact-row">
             <div class="about-contact-label">Markets</div>
@@ -1482,7 +1497,7 @@
     </p>
     <p class="cta-direct">
       Call us directly: <a href="tel:8888146365">888.814.6365</a> &nbsp;·&nbsp;
-      <a href="mailto:Office@BenAnthony.com">Office@BenAnthony.com</a>
+      <a href="mailto:office@benanthony.com">office@benanthony.com</a>
     </p>
     <div class="cta-actions">
       <a href="#contact" class="btn-cta-primary">Let's Talk</a>
@@ -1534,7 +1549,7 @@
           <div class="contact-line"><div class="contact-lbl">Brokerage</div><div class="contact-val">Real Brokerage · NASDAQ: REAX</div></div>
           <div class="contact-line"><div class="contact-lbl">Markets</div><div class="contact-val">Fairfield County, CT · Bergen County, NJ</div></div>
           <div class="contact-line"><div class="contact-lbl">Phone</div><div class="contact-val"><a href="tel:8888146365">888.814.6365</a></div></div>
-          <div class="contact-line"><div class="contact-lbl">Email</div><div class="contact-val"><a href="mailto:Office@BenAnthony.com">Office@BenAnthony.com</a></div></div>
+          <div class="contact-line"><div class="contact-lbl">Email</div><div class="contact-val"><a href="mailto:office@benanthony.com">office@benanthony.com</a></div></div>
           <div class="contact-line"><div class="contact-lbl">Web</div><div class="contact-val">www.benanthony.com</div></div>
           <div class="contact-line"><div class="contact-lbl">Instagram</div><div class="contact-val"><a href="https://instagram.com/benanthony.realtor" target="_blank" style="color:var(--coral);">@benanthony.realtor</a></div></div>
           <div class="contact-line"><div class="contact-lbl">CT License</div><div class="contact-val">#0804533</div></div>
@@ -1595,7 +1610,7 @@
         <div class="footer-brand-name">Ben Anthony</div>
         <div class="footer-brand-sub">Real Brokerage · Connecticut | New Jersey</div>
         <a href="tel:8888146365" class="footer-contact-link">888.814.6365</a>
-        <a href="mailto:Office@BenAnthony.com" class="footer-contact-link">Office@BenAnthony.com</a>
+        <a href="mailto:office@benanthony.com" class="footer-contact-link">office@benanthony.com</a>
         <a href="https://instagram.com/benanthony.realtor" target="_blank" class="footer-contact-link">@benanthony.realtor</a>
       </div>
       <div class="footer-links">
