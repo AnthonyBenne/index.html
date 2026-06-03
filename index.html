@@ -12,19 +12,20 @@
     :root {
       --coral:      #E8532A;
       --coral-dark: #C94420;
-      --cobalt:     #050E3D;
+      --cobalt:     #080E20;
       --chalk:      #FFFFFF;
       --onyx:       #1D1D1D;
       --white:      #FFFFFF;
       --gray:       #8A8680;
       --gray-light: #D5D2C8;
       --aqua:       #00FBF0;
+      --teal:       #00FBF0;
       --seaglass:   #BFDDDB;
     }
     html { scroll-behavior: smooth; }
     body {
       font-family: 'DM Sans', sans-serif;
-      background: var(--cobalt);
+      background: #080E20;
       color: var(--white);
       overflow-x: hidden;
       -webkit-font-smoothing: antialiased;
@@ -43,7 +44,7 @@
       background: linear-gradient(to bottom, rgba(0,0,0,0.65) 0%, transparent 100%);
     }
     nav.scrolled {
-      background: rgba(5,14,61,0.97);
+      background: rgba(8,14,32,0.97);
       backdrop-filter: blur(16px);
       padding: 14px 56px;
       border-bottom: 1px solid rgba(255,255,255,0.07);
@@ -138,10 +139,10 @@
       inset: 0;
     }
     .scene-ct .scene-fallback {
-      background: linear-gradient(160deg, #050E3D 0%, #071550 50%, #050E3D 100%);
+      background: linear-gradient(160deg, #080E20 0%, #0A1528 50%, #080E20 100%);
     }
     .scene-nj .scene-fallback {
-      background: linear-gradient(160deg, #071550 0%, #0a1a60 50%, #050E3D 100%);
+      background: linear-gradient(160deg, #0A1528 0%, #0D1C35 50%, #080E20 100%);
     }
     .hero-overlay {
       position: absolute;
@@ -199,7 +200,7 @@
       gap: 10px;
       margin-bottom: 28px;
     }
-    .hero-eyebrow-dot { width: 6px; height: 6px; background: var(--coral); border-radius: 50%; }
+    .hero-eyebrow-dot { width: 6px; height: 6px; background: var(--aqua); border-radius: 50%; }
     .hero-eyebrow-text {
       font-size: 10px;
       font-weight: 600;
@@ -248,7 +249,7 @@
     .btn-hero:hover { background: var(--coral-dark); transform: translateY(-2px); }
 
     /* ── TICKER ── */
-    .ticker { background: #FFFFFF; padding: 13px 0; overflow: hidden; border-top: 2px solid var(--coral); border-bottom: 2px solid var(--coral); }
+    .ticker { background: #FFFFFF; padding: 13px 0; overflow: hidden; border-top: 2px solid var(--aqua); border-bottom: 2px solid var(--aqua); }
     .ticker-inner {
       display: flex; gap: 56px;
       animation: tickMove 28s linear infinite;
@@ -260,7 +261,7 @@
       text-transform: uppercase; color: var(--cobalt);
       white-space: nowrap; flex-shrink: 0;
     }
-    .ticker-dot { color: var(--coral); font-size: 16px; }
+    .ticker-dot { color: var(--aqua); font-size: 16px; }
     @keyframes tickMove { from{transform:translateX(0)} to{transform:translateX(-50%)} }
 
     /* ── SECTION COMMON ── */
@@ -271,7 +272,7 @@
       color: var(--coral); margin-bottom: 18px;
       display: flex; align-items: center; gap: 10px;
     }
-    .eyebrow::before { content:''; display:block; width:20px; height:1px; background:var(--coral); }
+    .eyebrow::before { content:''; display:block; width:20px; height:1px; background:var(--aqua); }
     .serif-h2 {
       font-family: 'Cormorant Garamond', serif;
       font-size: clamp(40px, 5vw, 60px);
@@ -281,7 +282,7 @@
 
     /* ── 1. PROBLEM SECTION ── */
     .problem {
-      background: var(--cobalt);
+      background: radial-gradient(ellipse at 60% 40%, #0D1C38 0%, #080E20 70%);
       padding: 120px 0;
     }
     .problem-top {
@@ -337,7 +338,7 @@
 
     /* ── 2. STORY SECTION (Why Real) ── */
     .story {
-      background: var(--cobalt);
+      background: radial-gradient(ellipse at 60% 40%, #0D1C38 0%, #080E20 70%);
       padding: 120px 0;
     }
     .story-grid {
@@ -365,7 +366,7 @@
       background: rgba(255,255,255,0.06);
     }
     .story-fact {
-      background: var(--cobalt);
+      background: radial-gradient(ellipse at 60% 40%, #0D1C38 0%, #080E20 70%);
       padding: 32px 36px;
       display: flex;
       gap: 20px;
@@ -476,7 +477,7 @@
 
     /* ── 4. FEATURES — WHAT YOU GET ── */
     .features {
-      background: var(--cobalt);
+      background: radial-gradient(ellipse at 40% 60%, #0D1C38 0%, #080E20 70%);
       padding: 120px 0;
     }
     .features-top {
@@ -628,9 +629,18 @@
     .cta-bg {
       position: absolute;
       inset: 0;
-      background:
-        linear-gradient(rgba(0,0,0,0.72), rgba(0,0,0,0.72)),
-        url('https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=1600&q=80') center/cover no-repeat;
+      overflow: hidden;
+    }
+    .cta-bg video {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      object-position: center;
+    }
+    .cta-bg::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.65);
     }
     .cta-content { position: relative; z-index: 2; padding: 0 40px; }
     .cta-h2 {
@@ -689,6 +699,149 @@
     }
     .btn-cta-outline:hover { border-color: white; transform: translateY(-2px); }
 
+    /* ── SCHEDULE ── */
+    .schedule-section {
+      background: radial-gradient(ellipse at 60% 40%, #0D1C38 0%, #080E20 70%);
+      padding: 100px 0;
+      border-top: 1px solid rgba(255,255,255,0.07);
+    }
+    .schedule-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 56px;
+    }
+    .schedule-eyebrow {
+      color: var(--aqua);
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+    .schedule-eyebrow::before {
+      content: '';
+      display: block;
+      width: 20px;
+      height: 1px;
+      background: var(--aqua);
+    }
+    .schedule-h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(36px, 5vw, 60px);
+      font-weight: 300;
+      color: white;
+      line-height: 1.1;
+      margin-bottom: 56px;
+    }
+    .schedule-h2 em {
+      font-style: italic;
+      color: var(--coral);
+    }
+    .schedule-tiles {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+    .schedule-tile {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 16px;
+      padding: 40px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      transition: background 0.3s, border-color 0.3s, transform 0.3s;
+    }
+    .schedule-tile:hover {
+      background: rgba(255,255,255,0.07);
+      border-color: rgba(255,255,255,0.15);
+      transform: translateY(-3px);
+    }
+    .schedule-tile-icon {
+      font-size: 32px;
+      margin-bottom: 4px;
+    }
+    .schedule-tile-label {
+      font-size: 9px;
+      font-weight: 600;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--aqua);
+    }
+    .schedule-tile h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 28px;
+      font-weight: 300;
+      color: white;
+      line-height: 1.2;
+    }
+    .schedule-tile p {
+      font-size: 14px;
+      font-weight: 300;
+      color: rgba(255,255,255,0.5);
+      line-height: 1.8;
+      flex-grow: 1;
+    }
+    .schedule-tile-btn {
+      display: inline-block;
+      padding: 14px 28px;
+      border-radius: 6px;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      text-decoration: none;
+      text-align: center;
+      transition: background 0.2s, transform 0.2s;
+      margin-top: 8px;
+    }
+    .schedule-tile-btn-meet {
+      background: var(--coral);
+      color: white;
+    }
+    .schedule-tile-btn-meet:hover {
+      background: var(--coral-dark);
+      transform: translateY(-2px);
+    }
+    .schedule-tile-btn-calendar {
+      background: transparent;
+      color: white;
+      border: 1px solid rgba(255,255,255,0.3);
+    }
+    .schedule-tile-btn-calendar:hover {
+      border-color: white;
+      transform: translateY(-2px);
+    }
+    .live-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 4px 12px;
+      background: rgba(232,83,42,0.15);
+      border: 1px solid rgba(232,83,42,0.3);
+      border-radius: 100px;
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--coral);
+      width: fit-content;
+    }
+    .live-dot {
+      width: 6px; height: 6px;
+      background: var(--coral);
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
+    @media (max-width: 1024px) {
+      .schedule-inner { padding: 0 24px; }
+      .schedule-tiles { grid-template-columns: 1fr; }
+    }
+
     /* ── CONTACT FORM ── */
     .contact {
       background: var(--chalk);
@@ -734,7 +887,7 @@
       align-items: center;
       gap: 16px;
       padding: 24px;
-      background: var(--cobalt);
+      background: radial-gradient(ellipse at 60% 40%, #0D1C38 0%, #080E20 70%);
       border-radius: 2px;
     }
     .contact-avatar img {
@@ -801,7 +954,7 @@
 
     /* ── FOOTER ── */
     footer {
-      background: var(--cobalt);
+      background: radial-gradient(ellipse at 60% 40%, #0D1C38 0%, #080E20 70%);
       border-top: 1px solid rgba(255,255,255,0.06);
       padding: 48px 56px 32px;
     }
@@ -862,7 +1015,7 @@
 
     /* ── MEET BEN STRIP ── */
     .meet-ben {
-      background: var(--cobalt);
+      background: radial-gradient(ellipse at 60% 40%, #0D1C38 0%, #080E20 70%);
       padding: 56px 0;
       border-bottom: 1px solid rgba(255,255,255,0.07);
     }
@@ -880,7 +1033,7 @@
       height: 160px;
       border-radius: 50%;
       object-fit: cover;
-      object-position: center top;
+      object-position: center 20%;
       border: 3px solid var(--coral);
       flex-shrink: 0;
     }
@@ -915,14 +1068,10 @@
       .nav-links, .nav-phone { display: none; }
       .hero-content {
         padding: 0 24px 80px;
-        text-align: center;
+        text-align: left;
         max-width: 100%;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
       }
-      .hero-eyebrow { justify-content: center; }
-      .hero-sub { max-width: 100%; text-align: center; }
+      .hero-eyebrow { justify-content: flex-start; }
       .scene-controls { right: 16px; bottom: 24px; }
       .section-wrap { padding: 0 24px; }
       .problem, .story, .proof, .features, .about, .contact, footer { padding: 80px 0; }
@@ -1028,7 +1177,7 @@
 <!-- ══ MEET BEN ══ -->
 <section class="meet-ben">
   <div class="meet-ben-inner">
-    <img class="meet-ben-photo" src="_A9A0436.jpg" alt="Ben Anthony"/>
+    <img class="meet-ben-photo" src="1.png" alt="Ben Anthony"/>
     <div>
       <div class="meet-ben-title">Licensed Real Estate Agent · Real Brokerage</div>
       <div class="meet-ben-name">Ben Anthony</div>
@@ -1270,7 +1419,7 @@
   <div class="section-wrap">
     <div class="about-grid">
       <div class="about-photo-wrap">
-        <img class="about-photo" src="_A9A0429.jpg" alt="Ben Anthony — Real Brokerage"/>
+        <img class="about-photo" src="2.png" alt="Ben Anthony — Real Brokerage"/>
         <div class="about-badge">
           <div class="about-badge-label">Licensed Agent · Real Brokerage</div>
           <div class="about-badge-name">Ben Anthony</div>
@@ -1304,8 +1453,12 @@
             <a href="https://instagram.com/benanthony.realtor" target="_blank" class="about-contact-value">@benanthony.realtor</a>
           </div>
           <div class="about-contact-row">
-            <div class="about-contact-label">Hours</div>
-            <div class="about-contact-value">Available 7 days · 24/7 response</div>
+            <div class="about-contact-label">CT License</div>
+            <div class="about-contact-value">#0804533</div>
+          </div>
+          <div class="about-contact-row">
+            <div class="about-contact-label">NJ License</div>
+            <div class="about-contact-value">#2564751</div>
           </div>
         </div>
       </div>
@@ -1315,7 +1468,11 @@
 
 <!-- ══ SECTION 5: CTA — ONE ACTION, ZERO FRICTION ══ -->
 <div class="cta-section" id="cta">
-  <div class="cta-bg"></div>
+  <div class="cta-bg">
+    <video autoplay muted loop playsinline preload="auto">
+      <source src="Home.mp4" type="video/mp4"/>
+    </video>
+  </div>
   <div class="cta-content">
     <h2 class="cta-h2">
       Ready to<br><em>Move?</em>
@@ -1334,6 +1491,36 @@
   </div>
 </div>
 
+<!-- ══ SCHEDULE ══ -->
+<section class="schedule-section">
+  <div class="schedule-inner">
+    <div class="schedule-eyebrow">Connect With Ben</div>
+    <h2 class="schedule-h2">Two Ways to <em>Talk Today.</em></h2>
+    <div class="schedule-tiles">
+
+      <!-- Google Meet Tile -->
+      <div class="schedule-tile">
+        <div class="live-badge"><span class="live-dot"></span>Open Office</div>
+        <div class="schedule-tile-icon">🎥</div>
+        <div class="schedule-tile-label">Google Meet</div>
+        <h3>Jump Into My Room</h3>
+        <p>No appointment needed. If I'm available, the door is open. Drop in, ask a question, or talk through your situation — real time, face to face.</p>
+        <a href="https://meet.google.com/ims-aisi-mtf" target="_blank" class="schedule-tile-btn schedule-tile-btn-meet">Enter Google Meet</a>
+      </div>
+
+      <!-- Calendar Tile -->
+      <div class="schedule-tile">
+        <div class="schedule-tile-icon">📅</div>
+        <div class="schedule-tile-label">Google Calendar</div>
+        <h3>Book a 1-on-1</h3>
+        <p>Prefer a set time? View my real availability and lock in a private consultation. Fairfield County, Bergen County, or anywhere in between — let's talk.</p>
+        <a href="https://calendar.app.google/dLJGeMPwJKYLLLFG8" target="_blank" class="schedule-tile-btn schedule-tile-btn-calendar">View My Calendar</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
 <!-- ══ SECTION 6: CONTACT FORM ══ -->
 <section class="contact" id="contact">
   <div class="section-wrap">
@@ -1348,9 +1535,10 @@
           <div class="contact-line"><div class="contact-lbl">Markets</div><div class="contact-val">Fairfield County, CT · Bergen County, NJ</div></div>
           <div class="contact-line"><div class="contact-lbl">Phone</div><div class="contact-val"><a href="tel:8888146365">888.814.6365</a></div></div>
           <div class="contact-line"><div class="contact-lbl">Email</div><div class="contact-val"><a href="mailto:Office@BenAnthony.com">Office@BenAnthony.com</a></div></div>
-          <div class="contact-line"><div class="contact-lbl">Web</div><div class="contact-val">real.BenAnthony.com</div></div>
+          <div class="contact-line"><div class="contact-lbl">Web</div><div class="contact-val">www.benanthony.com</div></div>
           <div class="contact-line"><div class="contact-lbl">Instagram</div><div class="contact-val"><a href="https://instagram.com/benanthony.realtor" target="_blank" style="color:var(--coral);">@benanthony.realtor</a></div></div>
-          <div class="contact-line"><div class="contact-lbl">Hours</div><div class="contact-val">7 days · 24/7 office response</div></div>
+          <div class="contact-line"><div class="contact-lbl">CT License</div><div class="contact-val">#0804533</div></div>
+          <div class="contact-line"><div class="contact-lbl">NJ License</div><div class="contact-val">#2564751</div></div>
         </div>
 
         <div class="contact-avatar">
