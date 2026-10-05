@@ -1032,7 +1032,7 @@
     .about-badge { left: -16px; }
     @media (max-width: 960px) { .hero-content { padding-bottom: 128px; } .scene-controls { bottom: 40px; } }
     @media (max-width: 960px) { .hero { min-height: 680px; } }
-    .footer-avatar { width: 56px; height: 56px; border-radius: 50%; border: 2px solid var(--coral); object-fit: cover; object-position: center top; flex-shrink: 0; display: block; }
+    .footer-avatar { width: 56px; height: 56px; border-radius: 50%; border: 1px solid var(--coral); object-fit: cover; object-position: center top; flex-shrink: 0; display: block; }
     @media (max-width: 900px) { .about-photo { width: 100%; } .about-badge { left: 0; } .about-grid { gap: 56px; } .about-grid > * { min-width: 0; } }
 
     /* ── Scheduler panel ── */
@@ -1316,7 +1316,7 @@
     <div class="sch-view" id="sch-pick">
       <div class="sch-eyebrow">30-Minute Consultation</div>
       <h2 class="sch-title" id="sch-title">Choose a <em>Time.</em></h2>
-      <p class="sch-sub">A phone call with Ben. Times are shown in Eastern Time.</p>
+      <p class="sch-sub">Thirty minutes with Ben, by phone or video. Times are shown in Eastern Time.</p>
       <div class="sch-status" id="sch-status" role="status">Finding open times&hellip;</div>
       <div id="sch-picker" hidden>
         <div class="sch-label" id="sch-day-label">Day</div>
@@ -1334,6 +1334,13 @@
       <div class="sch-eyebrow">Your Consultation</div>
       <p class="sch-chosen" id="sch-chosen"></p>
       <button class="sch-link" id="sch-back" type="button">Change time</button>
+      <div class="sch-field">
+        <label id="sch-method-label">How would you like to meet?</label>
+        <div class="sch-seg" id="sch-method" role="group" aria-labelledby="sch-method-label">
+          <button type="button" data-method="phone" aria-pressed="true">Phone call</button>
+          <button type="button" data-method="video" aria-pressed="false">Video call</button>
+        </div>
+      </div>
       <div class="sch-row">
         <div class="sch-field"><label for="sch-first">First name</label><input id="sch-first" name="first" type="text" autocomplete="given-name" required/></div>
         <div class="sch-field"><label for="sch-last">Last name</label><input id="sch-last" name="last" type="text" autocomplete="family-name" required/></div>
@@ -1344,7 +1351,7 @@
       </div>
       <div class="sch-field">
         <label id="sch-market-label">Where are you looking?</label>
-        <div class="sch-seg" role="group" aria-labelledby="sch-market-label">
+        <div class="sch-seg" id="sch-market" role="group" aria-labelledby="sch-market-label">
           <button type="button" data-market="Connecticut" aria-pressed="false">Connecticut</button>
           <button type="button" data-market="New Jersey" aria-pressed="false">New Jersey</button>
         </div>
@@ -1360,7 +1367,7 @@
       <div class="sch-eyebrow">Confirmed</div>
       <h2 class="sch-title" tabindex="-1" id="sch-done-title">You're <em>Booked.</em></h2>
       <p class="sch-chosen" id="sch-done-when"></p>
-      <p class="sch-note">Ben will call you at the number you gave. A calendar invitation is on its way to your email.</p>
+      <p class="sch-note" id="sch-done-note">Ben will call you at the number you gave. A calendar invitation is on its way to your email.</p>
       <div class="sch-actions"><button class="sch-btn" id="sch-finish" type="button">Done</button></div>
     </div>
 
@@ -1379,7 +1386,7 @@
   var $ = function (id) { return document.getElementById(id); };
   var overlay = $('sch'), panel = $('sch-panel');
   var views = ['sch-pick', 'sch-form', 'sch-done', 'sch-fail'];
-  var days = null, loading = null, dayIdx = 0, slot = null, showAll = false, market = '', opener = null;
+  var days = null, loading = null, dayIdx = 0, slot = null, showAll = false, market = '', method = 'phone', opener = null;
 
   function show(id) {
     views.forEach(function (v) { $(v).hidden = (v !== id); });
@@ -1468,11 +1475,19 @@
     show('sch-form'); $('sch-first').focus();
   });
   $('sch-back').addEventListener('click', function () { show('sch-pick'); });
-  Array.prototype.forEach.call(document.querySelectorAll('.sch-seg button'), function (b) {
+  Array.prototype.forEach.call(document.querySelectorAll('#sch-market button'), function (b) {
     b.addEventListener('click', function () {
       market = (market === b.dataset.market) ? '' : b.dataset.market;
-      Array.prototype.forEach.call(document.querySelectorAll('.sch-seg button'), function (x) {
+      Array.prototype.forEach.call(document.querySelectorAll('#sch-market button'), function (x) {
         x.setAttribute('aria-pressed', String(x.dataset.market === market));
+      });
+    });
+  });
+  Array.prototype.forEach.call(document.querySelectorAll('#sch-method button'), function (b) {
+    b.addEventListener('click', function () {
+      method = b.dataset.method;
+      Array.prototype.forEach.call(document.querySelectorAll('#sch-method button'), function (x) {
+        x.setAttribute('aria-pressed', String(x.dataset.method === method));
       });
     });
   });
@@ -1503,12 +1518,15 @@
       headers: { 'Content-Type': 'text/plain;charset=utf-8' },
       body: JSON.stringify({
         first: f.first.value.trim(), last: f.last.value.trim(), phone: f.phone.value.trim(),
-        email: f.email.value.trim(), market: market, start: slot.iso, website: $('sch-website').value
+        email: f.email.value.trim(), market: market, method: method, start: slot.iso, website: $('sch-website').value
       })
     }).then(function (r) { return r.json(); }).then(function (d) {
       btn.disabled = false; btn.textContent = 'Confirm Consultation';
       if (d.ok) {
         $('sch-done-when').textContent = d.when || whenText();
+        $('sch-done-note').textContent = (method === 'video')
+          ? 'Your calendar invitation is on its way to your email, with a Google Meet link for the video call.'
+          : 'Ben will call you at the number you gave. A calendar invitation is on its way to your email.';
         show('sch-done'); $('sch-done-title').focus();
         days = null; loading = null; slot = null;
         return;
