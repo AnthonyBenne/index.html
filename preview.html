@@ -1034,7 +1034,65 @@
     @media (max-width: 960px) { .hero { min-height: 680px; } }
     .footer-avatar { width: 56px; height: 56px; border-radius: 50%; border: 2px solid var(--coral); object-fit: cover; object-position: center top; flex-shrink: 0; display: block; }
     @media (max-width: 900px) { .about-photo { width: 100%; } .about-badge { left: 0; } .about-grid { gap: 56px; } .about-grid > * { min-width: 0; } }
-</style>
+
+    /* ── Scheduler panel ── */
+    .sch-overlay { position: fixed; inset: 0; z-index: 1000; display: none; align-items: center; justify-content: center; padding: 24px; background: rgba(3,8,34,0.78); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); opacity: 0; transition: opacity 0.25s ease; }
+    .sch-overlay.open { display: flex; }
+    .sch-overlay.show { opacity: 1; }
+    .sch-panel { position: relative; width: 100%; max-width: 640px; max-height: calc(100vh - 48px); overflow-y: auto; background: var(--cobalt); color: white; border: 1px solid rgba(255,255,255,0.14); border-radius: 3px; padding: 52px 52px 44px; font-family: 'DM Sans', sans-serif; box-shadow: 0 40px 120px rgba(0,0,0,0.55); transform: translateY(14px); transition: transform 0.3s ease; }
+    .sch-overlay.show .sch-panel { transform: none; }
+    .sch-close { position: absolute; top: 16px; right: 16px; width: 44px; height: 44px; background: none; border: none; color: rgba(255,255,255,0.6); font-size: 26px; line-height: 1; cursor: pointer; border-radius: 2px; }
+    .sch-close:hover { color: white; }
+    .sch-eyebrow { font-size: 10px; font-weight: 600; letter-spacing: 0.26em; text-transform: uppercase; color: var(--aqua); margin-bottom: 14px; }
+    .sch-title { font-family: 'Cormorant Garamond', serif; font-weight: 300; font-size: clamp(34px, 5vw, 46px); line-height: 1.05; margin: 0 0 10px; }
+    .sch-title em { font-style: italic; color: var(--coral); }
+    .sch-sub { font-size: 14px; color: rgba(255,255,255,0.62); margin: 0 0 30px; line-height: 1.6; }
+    .sch-label { font-size: 10px; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; color: rgba(255,255,255,0.5); margin: 0 0 12px; }
+    .sch-days { display: flex; gap: 8px; overflow-x: auto; padding: 2px 2px 14px; margin: 0 -2px 22px; scrollbar-width: thin; scrollbar-color: rgba(255,255,255,0.25) transparent; }
+    .sch-day { flex: 0 0 auto; width: 68px; padding: 12px 0 10px; background: transparent; border: 1px solid rgba(255,255,255,0.2); border-radius: 2px; color: white; cursor: pointer; text-align: center; font-family: inherit; transition: border-color 0.15s, background 0.15s; }
+    .sch-day:hover { border-color: rgba(255,255,255,0.6); }
+    .sch-day .wd { display: block; font-size: 10px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.6); }
+    .sch-day .dn { display: block; font-family: 'Cormorant Garamond', serif; font-size: 30px; line-height: 1.15; }
+    .sch-day .mo { display: block; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255,255,255,0.5); }
+    .sch-day[aria-pressed="true"] { background: var(--coral); border-color: var(--coral); }
+    .sch-day[aria-pressed="true"] .wd, .sch-day[aria-pressed="true"] .mo { color: rgba(255,255,255,0.92); }
+    .sch-times { display: grid; grid-template-columns: repeat(auto-fill, minmax(104px, 1fr)); gap: 8px; margin-bottom: 14px; }
+    .sch-time { padding: 13px 6px; background: transparent; border: 1px solid rgba(255,255,255,0.2); border-radius: 2px; color: white; font-family: inherit; font-size: 14px; cursor: pointer; transition: border-color 0.15s, background 0.15s; }
+    .sch-time:hover { border-color: rgba(255,255,255,0.6); }
+    .sch-time[aria-pressed="true"] { background: var(--coral); border-color: var(--coral); }
+    .sch-more { background: none; border: none; padding: 6px 0; color: var(--aqua); font-family: inherit; font-size: 13px; cursor: pointer; text-decoration: underline; text-underline-offset: 3px; }
+    .sch-actions { margin-top: 26px; display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
+    .sch-btn { background: var(--coral); color: white; border: none; border-radius: 2px; padding: 17px 40px; font-family: inherit; font-size: 11px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; cursor: pointer; transition: background 0.2s; }
+    .sch-btn:hover { background: var(--coral-dark); }
+    .sch-btn[disabled] { opacity: 0.4; cursor: default; }
+    .sch-link { background: none; border: none; padding: 0; color: rgba(255,255,255,0.7); font-family: inherit; font-size: 13px; cursor: pointer; text-decoration: underline; text-underline-offset: 3px; }
+    .sch-link:hover { color: white; }
+    .sch-chosen { font-family: 'Cormorant Garamond', serif; font-size: 24px; line-height: 1.25; margin: 0 0 6px; }
+    .sch-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .sch-field { margin-top: 20px; }
+    .sch-field label { display: block; font-size: 10px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255,255,255,0.55); margin-bottom: 8px; }
+    .sch-field input { width: 100%; box-sizing: border-box; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.2); border-radius: 2px; padding: 14px 14px; color: white; font-family: inherit; font-size: 16px; }
+    .sch-field input:focus { outline: none; border-color: var(--aqua); }
+    .sch-field input[aria-invalid="true"] { border-color: var(--coral); }
+    .sch-hp { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; }
+    .sch-seg { display: flex; gap: 8px; }
+    .sch-seg button { flex: 1; padding: 13px 8px; background: transparent; border: 1px solid rgba(255,255,255,0.2); border-radius: 2px; color: white; font-family: inherit; font-size: 14px; cursor: pointer; }
+    .sch-seg button[aria-pressed="true"] { background: rgba(255,255,255,0.12); border-color: white; }
+    .sch-msg { margin-top: 18px; font-size: 14px; line-height: 1.6; color: #FFB3C4; min-height: 1px; }
+    .sch-note { font-size: 13px; line-height: 1.7; color: rgba(255,255,255,0.6); margin: 0; }
+    .sch-note a { color: white; }
+    .sch-status { padding: 36px 0 20px; font-size: 15px; color: rgba(255,255,255,0.7); }
+    .sch-view[hidden] { display: none; }
+    .sch-overlay :focus-visible { outline: 2px solid var(--aqua); outline-offset: 2px; }
+    @media (max-width: 600px) {
+      .sch-overlay { padding: 0; align-items: stretch; }
+      .sch-panel { max-width: none; max-height: none; height: 100%; border: none; border-radius: 0; padding: 64px 24px 32px; }
+      .sch-row { grid-template-columns: 1fr; gap: 0; }
+      .sch-btn { width: 100%; }
+      .sch-times { grid-template-columns: repeat(3, 1fr); }
+    }
+    @media (prefers-reduced-motion: reduce) { .sch-overlay, .sch-panel { transition: none; } }
+  </style>
   <link rel="icon" href="/favicon.ico" sizes="any">
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2064%2064%22%3E%3Crect%20width%3D%2264%22%20height%3D%2264%22%20rx%3D%2212%22%20fill%3D%22white%22%2F%3E%3Crect%20x%3D%222%22%20y%3D%222%22%20width%3D%2260%22%20height%3D%2260%22%20rx%3D%2210%22%20fill%3D%22none%22%20stroke%3D%22%23050E3D%22%20stroke-width%3D%223%22%2F%3E%3Ctext%20x%3D%2250%25%22%20y%3D%2254%25%22%20dominant-baseline%3D%22middle%22%20text-anchor%3D%22middle%22%20font-family%3D%22Helvetica%2C%20Arial%2C%20sans-serif%22%20font-size%3D%2225%22%20font-weight%3D%22500%22%20letter-spacing%3D%22-1%22%20fill%3D%22%23050E3D%22%3EBA%3C%2Ftext%3E%3C%2Fsvg%3E">
   <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
@@ -1249,5 +1307,233 @@
   resetAuto();
 </script>
 
+
+<!-- ══ SCHEDULER ══ -->
+<div class="sch-overlay" id="sch" role="dialog" aria-modal="true" aria-labelledby="sch-title" aria-hidden="true">
+  <div class="sch-panel" id="sch-panel">
+    <button class="sch-close" id="sch-close" type="button" aria-label="Close">&times;</button>
+
+    <div class="sch-view" id="sch-pick">
+      <div class="sch-eyebrow">30-Minute Consultation</div>
+      <h2 class="sch-title" id="sch-title">Choose a <em>Time.</em></h2>
+      <p class="sch-sub">A phone call with Ben. Times are shown in Eastern Time.</p>
+      <div class="sch-status" id="sch-status" role="status">Finding open times&hellip;</div>
+      <div id="sch-picker" hidden>
+        <div class="sch-label" id="sch-day-label">Day</div>
+        <div class="sch-days" id="sch-days" role="group" aria-labelledby="sch-day-label"></div>
+        <div class="sch-label" id="sch-time-label">Time</div>
+        <div class="sch-times" id="sch-times" role="group" aria-labelledby="sch-time-label"></div>
+        <button class="sch-more" id="sch-more" type="button" hidden>Show more times</button>
+        <div class="sch-actions">
+          <button class="sch-btn" id="sch-next" type="button" disabled>Continue</button>
+        </div>
+      </div>
+    </div>
+
+    <form class="sch-view" id="sch-form" hidden novalidate>
+      <div class="sch-eyebrow">Your Consultation</div>
+      <p class="sch-chosen" id="sch-chosen"></p>
+      <button class="sch-link" id="sch-back" type="button">Change time</button>
+      <div class="sch-row">
+        <div class="sch-field"><label for="sch-first">First name</label><input id="sch-first" name="first" type="text" autocomplete="given-name" required/></div>
+        <div class="sch-field"><label for="sch-last">Last name</label><input id="sch-last" name="last" type="text" autocomplete="family-name" required/></div>
+      </div>
+      <div class="sch-row">
+        <div class="sch-field"><label for="sch-phone">Phone</label><input id="sch-phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" required/></div>
+        <div class="sch-field"><label for="sch-email">Email</label><input id="sch-email" name="email" type="email" autocomplete="email" required/></div>
+      </div>
+      <div class="sch-field">
+        <label id="sch-market-label">Where are you looking?</label>
+        <div class="sch-seg" role="group" aria-labelledby="sch-market-label">
+          <button type="button" data-market="Connecticut" aria-pressed="false">Connecticut</button>
+          <button type="button" data-market="New Jersey" aria-pressed="false">New Jersey</button>
+        </div>
+      </div>
+      <input class="sch-hp" type="text" name="website" id="sch-website" tabindex="-1" autocomplete="off" aria-hidden="true"/>
+      <div class="sch-msg" id="sch-msg" role="alert"></div>
+      <div class="sch-actions">
+        <button class="sch-btn" id="sch-submit" type="submit">Confirm Consultation</button>
+      </div>
+    </form>
+
+    <div class="sch-view" id="sch-done" hidden>
+      <div class="sch-eyebrow">Confirmed</div>
+      <h2 class="sch-title" tabindex="-1" id="sch-done-title">You're <em>Booked.</em></h2>
+      <p class="sch-chosen" id="sch-done-when"></p>
+      <p class="sch-note">Ben will call you at the number you gave. A calendar invitation is on its way to your email.</p>
+      <div class="sch-actions"><button class="sch-btn" id="sch-finish" type="button">Done</button></div>
+    </div>
+
+    <div class="sch-view" id="sch-fail" hidden>
+      <div class="sch-eyebrow">30-Minute Consultation</div>
+      <h2 class="sch-title">Let's Set It Up <em>by Phone.</em></h2>
+      <p class="sch-note">The calendar isn't loading right now. Call <a href="tel:8886060623">888.606.0623</a> and we'll schedule your consultation, or <a id="sch-fallback" href="#" target="_blank" rel="noopener">open the booking page</a>.</p>
+    </div>
+  </div>
+</div>
+
+<script>
+(function () {
+  var SCHED_URL = 'https://script.google.com/macros/s/AKfycbwFX-V5-SbefjHdOEPR_IQkT0bx_7N-s7g8iDrYGlHNBzeLNeqwS4KQsQk1tW16qiue/exec';
+  var BOOK_URL = 'https://calendar.app.google/LB1iepiCzTgnjZAf6';
+  var $ = function (id) { return document.getElementById(id); };
+  var overlay = $('sch'), panel = $('sch-panel');
+  var views = ['sch-pick', 'sch-form', 'sch-done', 'sch-fail'];
+  var days = null, loading = null, dayIdx = 0, slot = null, showAll = false, market = '', opener = null;
+
+  function show(id) {
+    views.forEach(function (v) { $(v).hidden = (v !== id); });
+    panel.scrollTop = 0;
+  }
+  function load(force) {
+    if (loading && !force) return loading;
+    loading = fetch(SCHED_URL, { method: 'GET', redirect: 'follow' })
+      .then(function (r) { return r.json(); })
+      .then(function (d) { if (!d.ok || !d.days || !d.days.length) throw new Error('none'); days = d.days; return days; });
+    return loading;
+  }
+  function renderDays() {
+    var box = $('sch-days'); box.innerHTML = '';
+    days.forEach(function (d, i) {
+      var b = document.createElement('button');
+      b.type = 'button'; b.className = 'sch-day';
+      b.setAttribute('aria-pressed', String(i === dayIdx));
+      b.setAttribute('aria-label', d.long);
+      b.innerHTML = '<span class="wd"></span><span class="dn"></span><span class="mo"></span>';
+      b.children[0].textContent = d.weekday; b.children[1].textContent = d.day; b.children[2].textContent = d.month;
+      b.addEventListener('click', function () { dayIdx = i; slot = null; showAll = false; renderDays(); renderTimes(); });
+      box.appendChild(b);
+    });
+  }
+  function renderTimes() {
+    var box = $('sch-times'); box.innerHTML = '';
+    var all = days[dayIdx].slots;
+    var onHour = all.filter(function (s) { return s.iso.slice(14, 16) === '00'; });
+    var list = (showAll || onHour.length < 3) ? all : onHour;
+    list.forEach(function (s) {
+      var b = document.createElement('button');
+      b.type = 'button'; b.className = 'sch-time'; b.textContent = s.label;
+      b.setAttribute('aria-pressed', String(!!slot && slot.iso === s.iso));
+      b.addEventListener('click', function () { slot = s; renderTimes(); });
+      box.appendChild(b);
+    });
+    $('sch-more').hidden = (list.length === all.length);
+    $('sch-next').disabled = !slot;
+  }
+  function whenText() { return days[dayIdx].long + ' at ' + slot.label; }
+
+  function open(e) {
+    if (e) e.preventDefault();
+    opener = document.activeElement;
+    overlay.classList.add('open'); overlay.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+    requestAnimationFrame(function () { overlay.classList.add('show'); });
+    show('sch-pick');
+    $('sch-close').focus();
+    if (days) { ready(); return; }
+    $('sch-status').hidden = false; $('sch-picker').hidden = true;
+    load().then(ready).catch(function () { loading = null; show('sch-fail'); });
+  }
+  function ready() {
+    $('sch-status').hidden = true; $('sch-picker').hidden = false;
+    renderDays(); renderTimes();
+  }
+  function close() {
+    overlay.classList.remove('show'); overlay.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+    setTimeout(function () { overlay.classList.remove('open'); }, 250);
+    if (opener && opener.focus) opener.focus();
+  }
+
+  $('sch-fallback').href = BOOK_URL;
+  $('sch-close').addEventListener('click', close);
+  $('sch-finish').addEventListener('click', close);
+  overlay.addEventListener('mousedown', function (e) { if (e.target === overlay) close(); });
+  document.addEventListener('keydown', function (e) {
+    if (!overlay.classList.contains('open')) return;
+    if (e.key === 'Escape') { close(); return; }
+    if (e.key !== 'Tab') return;
+    var f = Array.prototype.filter.call(panel.querySelectorAll('button, input, a[href]'), function (el) {
+      return !el.disabled && el.offsetParent !== null && el.tabIndex !== -1;
+    });
+    if (!f.length) return;
+    if (e.shiftKey && document.activeElement === f[0]) { e.preventDefault(); f[f.length - 1].focus(); }
+    else if (!e.shiftKey && document.activeElement === f[f.length - 1]) { e.preventDefault(); f[0].focus(); }
+  });
+  $('sch-more').addEventListener('click', function () { showAll = true; renderTimes(); });
+  $('sch-next').addEventListener('click', function () {
+    if (!slot) return;
+    $('sch-chosen').textContent = whenText();
+    $('sch-msg').textContent = '';
+    show('sch-form'); $('sch-first').focus();
+  });
+  $('sch-back').addEventListener('click', function () { show('sch-pick'); });
+  Array.prototype.forEach.call(document.querySelectorAll('.sch-seg button'), function (b) {
+    b.addEventListener('click', function () {
+      market = (market === b.dataset.market) ? '' : b.dataset.market;
+      Array.prototype.forEach.call(document.querySelectorAll('.sch-seg button'), function (x) {
+        x.setAttribute('aria-pressed', String(x.dataset.market === market));
+      });
+    });
+  });
+
+  ['sch-first', 'sch-last', 'sch-phone', 'sch-email'].forEach(function (id) {
+    $(id).addEventListener('input', function () {
+      this.setAttribute('aria-invalid', 'false');
+      if (!$('sch-form').querySelector('[aria-invalid="true"]')) $('sch-msg').textContent = '';
+    });
+  });
+
+  $('sch-form').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var f = { first: $('sch-first'), last: $('sch-last'), phone: $('sch-phone'), email: $('sch-email') };
+    var bad = [];
+    if (!f.first.value.trim()) bad.push(f.first);
+    if (!f.last.value.trim()) bad.push(f.last);
+    if (f.phone.value.replace(/\D/g, '').length < 10) bad.push(f.phone);
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(f.email.value.trim())) bad.push(f.email);
+    Object.keys(f).forEach(function (k) { f[k].setAttribute('aria-invalid', String(bad.indexOf(f[k]) !== -1)); });
+    if (bad.length) {
+      $('sch-msg').textContent = 'Please check the highlighted ' + (bad.length > 1 ? 'fields' : 'field') + '. Ben needs a name, a 10-digit phone number and an email address.';
+      bad[0].focus(); return;
+    }
+    var btn = $('sch-submit'); btn.disabled = true; btn.textContent = 'Booking…'; $('sch-msg').textContent = '';
+    fetch(SCHED_URL, {
+      method: 'POST', redirect: 'follow',
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+      body: JSON.stringify({
+        first: f.first.value.trim(), last: f.last.value.trim(), phone: f.phone.value.trim(),
+        email: f.email.value.trim(), market: market, start: slot.iso, website: $('sch-website').value
+      })
+    }).then(function (r) { return r.json(); }).then(function (d) {
+      btn.disabled = false; btn.textContent = 'Confirm Consultation';
+      if (d.ok) {
+        $('sch-done-when').textContent = d.when || whenText();
+        show('sch-done'); $('sch-done-title').focus();
+        days = null; loading = null; slot = null;
+        return;
+      }
+      if (d.error === 'taken') {
+        slot = null; days = null; loading = null;
+        show('sch-pick'); $('sch-status').hidden = false; $('sch-picker').hidden = true;
+        $('sch-status').textContent = 'That time was just taken. Finding other open times…';
+        load().then(ready).catch(function () { show('sch-fail'); });
+        return;
+      }
+      $('sch-msg').textContent = 'That didn’t go through. Please check your details and try again, or call 888.606.0623.';
+    }).catch(function () {
+      btn.disabled = false; btn.textContent = 'Confirm Consultation';
+      $('sch-msg').textContent = 'That didn’t go through. Please try again, or call 888.606.0623.';
+    });
+  });
+
+  Array.prototype.forEach.call(document.querySelectorAll('a[href="' + BOOK_URL + '"]'), function (a) {
+    if (a.id === 'sch-fallback') return;
+    a.addEventListener('click', open);
+  });
+  // warm the calendar so the panel opens instantly
+  setTimeout(function () { load().catch(function () { loading = null; }); }, 1500);
+})();
+</script>
 </body>
 </html>
