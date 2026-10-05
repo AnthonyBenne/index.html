@@ -1544,6 +1544,8 @@
     if (a.id === 'sch-fallback') return;
     a.addEventListener('click', open);
   });
+  // links that end in #schedule (the email signature) open the panel straight away
+  if (location.hash === '#schedule') setTimeout(function () { open(); }, 400);
   // warm the calendar so the panel opens instantly
   setTimeout(function () { load().catch(function () { loading = null; }); }, 1500);
 })();
