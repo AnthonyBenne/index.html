@@ -1135,6 +1135,9 @@
   .js-slide .about-photo{opacity:0;transform:translateX(-140px);transition:opacity 1s ease-out,transform 1.2s cubic-bezier(.16,1,.3,1)}
   .js-slide .about-photo.in{opacity:1;transform:none}
   @media (prefers-reduced-motion: reduce){.js-slide .about-photo{opacity:1;transform:none;transition:none}}
+  /* tighter About section, taller closing call-to-action */
+  @media (min-width:601px){.about{padding:80px 0}}
+  .cta-section{min-height:clamp(600px,85vh,820px)}
 </style>
 </head>
 <body>
