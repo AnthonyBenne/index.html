@@ -23,13 +23,28 @@
   .back { display: inline-block; margin-bottom: 32px; font-size: 14px; text-decoration: none; }
   hr { border: none; border-top: 1px solid #eee; margin: 48px 0; }
 </style>
+<!-- Meta Pixel: set PIXEL_ID below; nothing loads while it is empty -->
+<script>
+(function(){var PIXEL_ID='';
+if(!PIXEL_ID)return;
+!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init',PIXEL_ID);fbq('track','PageView');
+// Contact: any tap on a phone link
+document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('a[href^="tel:"]');if(a)fbq('track','Contact');},true);
+})();
+</script>
+<!-- End Meta Pixel -->
 </head>
 <body>
 
 <a class="back" href="/">&larr; Back to benanthony.com</a>
 
 <h1>Privacy Policy</h1>
-<p class="updated">Last updated: October 4, 2026</p>
+<p class="updated">Last updated: October 17, 2026</p>
 
 <p>This Privacy Policy explains how Ben Anthony, a licensed real estate agent with Real Broker CT, LLC (Connecticut) and Real Broker, LLC (New Jersey) ("we," "us," or "our"), collects, uses, and protects information you provide through benanthony.com, our contact forms, phone calls, and text messaging communications.</p>
 
@@ -52,6 +67,9 @@
 <h2>Information Sharing</h2>
 <p>We do not sell your personal information. We may share information with service providers who help us operate our business (such as our brokerage, Real Broker CT, LLC / Real Broker, LLC, our calendar and scheduling tools, and our email service provider) solely to deliver the services you've requested. These providers are not permitted to use your information for their own marketing purposes.</p>
 
+<h2>Cookies and Advertising</h2>
+<p>Our website uses the Meta Pixel, a tool from Meta Platforms, Inc., to measure visits and the effectiveness of our advertising, and to show our ads to people who have visited this site. The Pixel uses cookies to record actions such as page visits, taps on our phone number and completed consultation bookings. It does not receive the name, email or phone number you enter when booking. You can control ad personalization in your Facebook or Instagram ad settings, or by blocking or clearing cookies in your browser.</p>
+
 <h2>Data Security</h2>
 <p>We take reasonable measures to protect the information you share with us. However, no method of electronic transmission or storage is 100% secure, and we cannot guarantee absolute security.</p>
 
@@ -71,7 +89,7 @@
 <hr id="terms" />
 
 <h1>Terms of Service</h1>
-<p class="updated">Last updated: October 4, 2026</p>
+<p class="updated">Last updated: October 17, 2026</p>
 
 <p>These Terms of Service govern your use of benanthony.com and your communications with Ben Anthony, a licensed real estate agent with Real Broker CT, LLC (Connecticut) and Real Broker, LLC (New Jersey).</p>
 

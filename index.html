@@ -1147,6 +1147,21 @@
     .about-photo{width:auto;height:560px;aspect-ratio:3/4}
   }
 </style>
+<!-- Meta Pixel: set PIXEL_ID below; nothing loads while it is empty -->
+<script>
+(function(){var PIXEL_ID='';
+if(!PIXEL_ID)return;
+!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init',PIXEL_ID);fbq('track','PageView');
+// Contact: any tap on a phone link
+document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('a[href^="tel:"]');if(a)fbq('track','Contact');},true);
+})();
+</script>
+<!-- End Meta Pixel -->
 </head>
 <body>
 
@@ -1568,6 +1583,7 @@
           ? 'Your calendar invitation is on its way to your email, with a Google Meet link for the video call.'
           : 'Ben will call you at the number you gave. A calendar invitation is on its way to your email.';
         show('sch-done'); $('sch-done-title').focus();
+        if (window.fbq) fbq('track', 'Lead', {content_name: 'Consultation', content_category: method});
         days = null; loading = null; slot = null;
         return;
       }
