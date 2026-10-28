@@ -1241,9 +1241,8 @@ document.addEventListener('click',function(e){var a=e.target.closest&&e.target.c
   <div class="section-wrap">
     <div class="about-grid">
       <div class="about-photo-wrap">
-        <div class="about-show" role="img" aria-label="Photos of Ben Anthony">
+        <div class="about-show" role="img" aria-label="Photo of Ben Anthony">
           <img class="show-slide" src="ben-photo-1.jpg" alt="" width="600" height="750">
-          <img class="show-slide" src="ben-photo-2.jpg" alt="" width="488" height="610">
         </div>
         <div class="about-badge">
           <div class="about-badge-lockup">
@@ -1636,7 +1635,7 @@ document.addEventListener('click',function(e){var a=e.target.closest&&e.target.c
     i=(i+1)%s.length;enter(i,fromLeft);fromLeft=!fromLeft;}
   new IntersectionObserver(function(es){es.forEach(function(e){
     if(e.isIntersecting){if(!started){started=true;box.classList.add('in');s[0].classList.add('on');}
-      if(!timer)timer=setInterval(next,5000);}
+      if(!timer&&s.length>1)timer=setInterval(next,5000);}
     else if(timer){clearInterval(timer);timer=null;}
   });},{threshold:0.3}).observe(box);
 })();
