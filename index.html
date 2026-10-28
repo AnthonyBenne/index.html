@@ -1141,17 +1141,20 @@
     .about-grid{grid-template-columns:auto 1fr;gap:80px}
     .about-photo{width:auto;height:560px;aspect-ratio:3/4}
   }
-  /* About: white background, rotating cutout photos sliding in from alternating sides */
+  /* About: white background, framed 3-photo slideshow (frame slides in, photos rotate inside) */
   .about{background:#fff;overflow-x:clip}
-  .about-show{position:relative;width:min(540px,100%);aspect-ratio:1/1}
-  .show-slide{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;object-position:center bottom;opacity:0}
+  .about-show{position:relative;width:min(432px,100%);aspect-ratio:4/5;overflow:hidden;border-radius:2px;
+    background:#2e4450;box-shadow:0 30px 60px -24px rgba(5,14,61,.35),0 12px 24px -12px rgba(5,14,61,.2)}
+  .show-slide{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center top;opacity:0}
   .show-slide:first-child{opacity:1}
-  .about-show.js .show-slide{opacity:0;transform:translateX(var(--from,-90px));transition:opacity .9s ease,transform 1.3s cubic-bezier(.16,1,.3,1)}
+  .about-show.js{opacity:0;transform:translateX(-120px);transition:opacity 1s ease-out,transform 1.2s cubic-bezier(.16,1,.3,1)}
+  .about-show.js.in{opacity:1;transform:none}
+  .about-show.js .show-slide{opacity:0;transform:translateX(var(--from,-40px)) scale(1.04);transition:opacity 1.1s ease,transform 1.6s cubic-bezier(.16,1,.3,1)}
   .about-show.js .show-slide.on{opacity:1;transform:none}
-  .about-show.js .show-slide.off{opacity:0;transform:translateX(var(--to,90px));transition:opacity .7s ease,transform 1s ease-in}
+  .about-show.js .show-slide.off{opacity:0;transform:translateX(var(--to,40px));transition:opacity 1s ease,transform 1.2s ease-in}
   .about-badge{z-index:2}
-  @media (min-width:961px){.about-show{width:540px}}
-  @media (min-width:601px) and (max-width:960px){.about-show{width:min(540px,100%);margin:0 auto}}
+  @media (min-width:961px){.about-show{width:432px}}
+  @media (min-width:601px) and (max-width:960px){.about-show{margin:0 auto}}
 </style>
 <!-- Meta Pixel: set PIXEL_ID below; nothing loads while it is empty -->
 <script>
@@ -1239,9 +1242,9 @@ document.addEventListener('click',function(e){var a=e.target.closest&&e.target.c
     <div class="about-grid">
       <div class="about-photo-wrap">
         <div class="about-show" role="img" aria-label="Photos of Ben Anthony">
-          <img class="show-slide" src="ben-slide-1.jpg" alt="" width="750" height="750">
-          <img class="show-slide" src="ben-slide-2.jpg" alt="" width="750" height="750">
-          <img class="show-slide" src="ben-slide-3.jpg" alt="" width="750" height="750">
+          <img class="show-slide" src="ben-photo-1.jpg" alt="" width="864" height="1080">
+          <img class="show-slide" src="ben-photo-2.jpg" alt="" width="864" height="1080">
+          <img class="show-slide" src="ben-photo-3.jpg" alt="" width="864" height="1080">
         </div>
         <div class="about-badge">
           <div class="about-badge-lockup">
@@ -1627,13 +1630,13 @@ document.addEventListener('click',function(e){var a=e.target.closest&&e.target.c
   var s=[].slice.call(box.querySelectorAll('.show-slide'));
   if(window.matchMedia('(prefers-reduced-motion: reduce)').matches||!('IntersectionObserver' in window)) return;
   box.classList.add('js');
-  var i=0, fromLeft=true, timer=null, started=false;
+  var i=0, fromLeft=false, timer=null, started=false;
   function enter(n,left){var el=s[n];el.classList.remove('on','off');el.style.transition='none';
-    el.style.setProperty('--from',(left?-90:90)+'px');void el.offsetWidth;el.style.transition='';el.classList.add('on');}
-  function next(){var cur=s[i];cur.style.setProperty('--to',(fromLeft?90:-90)+'px');cur.classList.remove('on');cur.classList.add('off');
+    el.style.setProperty('--from',(left?-40:40)+'px');void el.offsetWidth;el.style.transition='';el.classList.add('on');}
+  function next(){var cur=s[i];cur.style.setProperty('--to',(fromLeft?40:-40)+'px');cur.classList.remove('on');cur.classList.add('off');
     i=(i+1)%s.length;enter(i,fromLeft);fromLeft=!fromLeft;}
   new IntersectionObserver(function(es){es.forEach(function(e){
-    if(e.isIntersecting){if(!started){started=true;enter(0,true);fromLeft=false;}
+    if(e.isIntersecting){if(!started){started=true;box.classList.add('in');s[0].classList.add('on');}
       if(!timer)timer=setInterval(next,5000);}
     else if(timer){clearInterval(timer);timer=null;}
   });},{threshold:0.3}).observe(box);
