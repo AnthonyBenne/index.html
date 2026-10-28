@@ -1141,15 +1141,15 @@
     .about-grid{grid-template-columns:auto 1fr;gap:80px}
     .about-photo{width:auto;height:560px;aspect-ratio:3/4}
   }
-  /* About: white background, framed 3-photo slideshow (frame slides in, photos rotate inside) */
+  /* About: white background, 3-photo slideshow inside a Real-aqua outline frame (frame slides in, photos rotate inside) */
   .about{background:#fff;overflow-x:clip}
   .about-show{position:relative;width:min(432px,100%);aspect-ratio:4/5;overflow:hidden;border-radius:2px;
-    background:#2e4450;box-shadow:0 30px 60px -24px rgba(5,14,61,.35),0 12px 24px -12px rgba(5,14,61,.2)}
-  .show-slide{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center top;opacity:0}
+    background:#fff;border:2px solid var(--aqua);box-sizing:border-box}
+  .show-slide{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center bottom;opacity:0}
   .show-slide:first-child{opacity:1}
   .about-show.js{opacity:0;transform:translateX(-120px);transition:opacity 1s ease-out,transform 1.2s cubic-bezier(.16,1,.3,1)}
   .about-show.js.in{opacity:1;transform:none}
-  .about-show.js .show-slide{opacity:0;transform:translateX(var(--from,-40px)) scale(1.04);transition:opacity 1.1s ease,transform 1.6s cubic-bezier(.16,1,.3,1)}
+  .about-show.js .show-slide{opacity:0;transform:translateX(var(--from,-40px));transition:opacity 1.1s ease,transform 1.6s cubic-bezier(.16,1,.3,1)}
   .about-show.js .show-slide.on{opacity:1;transform:none}
   .about-show.js .show-slide.off{opacity:0;transform:translateX(var(--to,40px));transition:opacity 1s ease,transform 1.2s ease-in}
   .about-badge{z-index:2}
@@ -1242,9 +1242,9 @@ document.addEventListener('click',function(e){var a=e.target.closest&&e.target.c
     <div class="about-grid">
       <div class="about-photo-wrap">
         <div class="about-show" role="img" aria-label="Photos of Ben Anthony">
-          <img class="show-slide" src="ben-photo-1.jpg" alt="" width="864" height="1080">
-          <img class="show-slide" src="ben-photo-2.jpg" alt="" width="864" height="1080">
-          <img class="show-slide" src="ben-photo-3.jpg" alt="" width="864" height="1080">
+          <img class="show-slide" src="ben-photo-1.jpg" alt="" width="600" height="750">
+          <img class="show-slide" src="ben-photo-2.jpg" alt="" width="600" height="750">
+          <img class="show-slide" src="ben-photo-3.jpg" alt="" width="416" height="520">
         </div>
         <div class="about-badge">
           <div class="about-badge-lockup">
